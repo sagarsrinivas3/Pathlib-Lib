@@ -59,6 +59,17 @@ def addPrefixAsCreatedTimestampMultipleDirLevels(dir):
       newFilePath = path.with_name(newFileName)
       path.rename(newFilePath)
 
+def changeFileExtension(dir, extension):
+  rootDir = Path(dir)
+  filePaths = rootDir.glob("**/*")
+  for path in filePaths:
+    if path.is_file():
+      newFileName = path.stem+extension
+      newFilePath = path.with_name(newFileName)
+      path.rename(newFilePath)
+      
+  
+
 # add prefix to all files in dir [ rename ]
 #addPrefix('files/')
 
@@ -70,3 +81,6 @@ def addPrefixAsCreatedTimestampMultipleDirLevels(dir):
 
 # rename a file with date of creation
 #addPrefixAsCreatedTimestampMultipleDirLevels("Months/")
+
+# change file extension
+#changeFileExtension("changeExtention/", ".out")

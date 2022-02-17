@@ -1,6 +1,6 @@
 from pathlib import Path
 
-myfile = 'files/sample.txt'
+myfile = 'files/new-sample.txt'
 
 #looping a file line by line
 with open(myfile, 'r') as f:
@@ -12,7 +12,7 @@ with open(myfile, 'r') as f:
   print(f.read())
 
 # read a file via pathlib
-p1 = Path('files/sample.txt')
+p1 = Path('files/new-sample.txt')
 
 #check a file exist or not
 if p1.exists():
