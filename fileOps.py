@@ -85,6 +85,14 @@ def archiveDir(dir, archFile):
     for path in rootdir.rglob("*.txt"):
       zf.write(path)
       path.unlink()
+
+def searchFile(searchTerm):
+  rootdir = Path(".")
+  for path in rootdir.rglob("*"):
+    if path.is_file():
+      if searchTerm in path.stem:
+        print(path.absolute())
+  
   
 # add prefix to all files in dir [ rename ]
 #addPrefix('files/')
@@ -107,3 +115,5 @@ def archiveDir(dir, archFile):
 # archive a directory
 # archiveDir("files", "archeive.zip")
 
+#search a file
+searchFile("f1-f1")
