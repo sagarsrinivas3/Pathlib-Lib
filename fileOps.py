@@ -93,6 +93,10 @@ def searchFile(searchTerm):
       if searchTerm in path.stem:
         print(path.absolute())
   
+def deleteFile(deleteTerm, dir):
+    rootdir = Path(dir)
+    for path in rootdir.glob(deleteTerm):
+      path.unlink()
   
 # add prefix to all files in dir [ rename ]
 #addPrefix('files/')
@@ -117,3 +121,6 @@ def searchFile(searchTerm):
 
 #search a file
 #searchFile("f1-f1")
+
+#delete all files
+#deleteFile("*.csv", "Months")
