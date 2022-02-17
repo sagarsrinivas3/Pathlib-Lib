@@ -116,4 +116,4 @@ def searchFile(searchTerm):
 # archiveDir("files", "archeive.zip")
 
 #search a file
-searchFile("f1-f1")
+#searchFile("f1-f1")
