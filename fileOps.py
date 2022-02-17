@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import datetime as dt
+import zipfile
 
 def addPrefix(dir):
   rootDir = Path(dir)
@@ -76,6 +77,14 @@ def createEmptyFile(dir, num):
     newFilePath = rootdir/Path(newfileName)
     newFilePath.touch()
     
+def archiveDir(dir, archFile):
+  rootdir = Path(dir)
+  archivePath = rootdir / Path(archFile)
+
+  with zipfile.ZipFile(archivePath, 'w') as zf:
+    for path in rootdir.rglob("*.txt"):
+      zf.write(path)
+      path.unlink()
   
 # add prefix to all files in dir [ rename ]
 #addPrefix('files/')
@@ -94,3 +103,7 @@ def createEmptyFile(dir, num):
 
 # create empty files in dir
 #createEmptyFile("emptyfiles", 5)
+
+# archive a directory
+# archiveDir("files", "archeive.zip")
+
