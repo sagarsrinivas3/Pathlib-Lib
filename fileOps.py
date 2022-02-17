@@ -69,7 +69,14 @@ def changeFileExtension(dir, extension):
       path.rename(newFilePath)
       
   
-
+def createEmptyFile(dir, num):
+  rootdir = Path(dir)
+  for i in range(num):
+    newfileName = "name"+str(i)+".txt"
+    newFilePath = rootdir/Path(newfileName)
+    newFilePath.touch()
+    
+  
 # add prefix to all files in dir [ rename ]
 #addPrefix('files/')
 
@@ -84,3 +91,6 @@ def changeFileExtension(dir, extension):
 
 # change file extension
 #changeFileExtension("changeExtention/", ".out")
+
+# create empty files in dir
+#createEmptyFile("emptyfiles", 5)
