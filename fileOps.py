@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import datetime as dt
 
 def addPrefix(dir):
   rootDir = Path(dir)
@@ -29,9 +30,34 @@ def addPrefixMultipleDirLevels(dir):
       newFilePath = path.with_name(newFileName)
       path.rename(newFilePath)
       
-      
-      
-      
+def getCreationDate(filepath):
+  stats = filepath.stat()
+  #st_atime - most recent timestamp file is accessed
+  #st_mtime - timestamp when file is modifed
+  #st_ctime - timestamp when file is created
+  createdSec = stats.st_ctime
+  createdTimestamp = convertSecToTimestamp(createdSec)
+  return createdTimestamp
+
+def convertSecToTimestamp(sec):
+  timestamp = dt.fromtimestamp(sec)
+  return timestamp
+  
+def getTimeStampOfFile(file):
+  rootDir = Path(file)
+  createdTimestamp = getCreationDate(rootDir)
+  dateCreatedString = createdTimestamp.strftime("%Y-%m-%d-%H-%M-%S")
+  return dateCreatedString
+
+def addPrefixAsCreatedTimestampMultipleDirLevels(dir):
+  rootDir = Path(dir)
+  filePaths = rootDir.glob("**/*")
+  for path in filePaths:
+    if path.is_file():
+      dateCreatedString = getTimeStampOfFile(dir)
+      newFileName = dateCreatedString+"-"+path.name
+      newFilePath = path.with_name(newFileName)
+      path.rename(newFilePath)
 
 # add prefix to all files in dir [ rename ]
 #addPrefix('files/')
@@ -41,3 +67,6 @@ def addPrefixMultipleDirLevels(dir):
 
 # add prefix to all files in mutiple dirs of a dir [ rename ]
 #addPrefixMultipleDirLevels('files2/')
+
+# rename a file with date of creation
+#addPrefixAsCreatedTimestampMultipleDirLevels("Months/")
